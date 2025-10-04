@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu/nginx:1.22-23.04_beta
 
 #MAINTAINER - Identifies the maintainer of the dockerfile.
 MAINTAINER mathurin.kasten@gmail.com
