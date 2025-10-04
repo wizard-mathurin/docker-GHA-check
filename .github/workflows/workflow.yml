@@ -44,7 +44,7 @@ jobs:
         env:
           # This token is automatically provided by GitHub Actions for the repository.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: echo "SARIF file uploaded to GitHub Advanced Security."
+        #run: echo "SARIF file uploaded to GitHub Advanced Security."
 
       - name: Display SARIF content (for debugging)
         run: |
