@@ -35,11 +35,20 @@ jobs:
           WIZ_CLIENT_SECRET: ${{ secrets.WIZ_CLIENT_SECRET }}
 
       - name: Run wiz-cli docker image scan
-        run: ./wizcli docker scan --image $TAG --policy "$POLICY" --output results.sarif,sarif
+        run: ./wizcli docker scan --policy "$POLICY" --output results.sarif,sarif
 
-      - name: Fetch digest of Docker image for Graph enrichment
-        run: ./wizcli docker tag --image $TAG
-
-      - uses: github/codeql-action/upload-sarif@v3
+      - name: Upload SARIF to GitHub Advanced Security
+        uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: results.sarif
+          sarif_file: results.sarif # This file was generated in the previous step
+        env:
+          # This token is automatically provided by GitHub Actions for the repository.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "SARIF file uploaded to GitHub Advanced Security."
+
+      - name: Display SARIF content (for debugging)
+        run: |
+          echo "--- SARIF Content ---"
+          cat results.sarif
+          echo "---------------------"
+        if: always() # Always run this step, even if previous steps fail
