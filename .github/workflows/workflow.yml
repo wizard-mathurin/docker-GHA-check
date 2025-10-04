@@ -35,7 +35,7 @@ jobs:
           WIZ_CLIENT_SECRET: ${{ secrets.WIZ_CLIENT_SECRET }}
 
       - name: Run wiz-cli docker image scan
-        run: ./wizcli docker scan --policy "$POLICY" --output results.sarif,sarif
+        run: ./wizcli docker scan --image --policy "$POLICY" --output results.sarif,sarif
 
       - name: Upload SARIF to GitHub Advanced Security
         uses: github/codeql-action/upload-sarif@v3
